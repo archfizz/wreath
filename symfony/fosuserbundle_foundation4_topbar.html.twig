@@ -1,0 +1,69 @@
+{#
+    Renders the Zurb Foundation 4 topbar with a user actions dropdown menu item 
+    when using the FOS UserBundle in the Symfony 2 framework.
+#}
+
+<div class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">
+        Your Logo
+      </a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <div class="top-bar-section">
+    <ul class="left">
+      <li class="divider"></li>
+
+      <li><a href="#">Item 1</a></li>
+      <li><a href="#">Item 2</a></li>
+
+      <li class="divider"></li>
+    </ul>
+
+    <ul class="right">
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li class="has-dropdown">
+          <a href="#">
+            {{ 'layout.logged_in_as'|trans({ '%username%': app.user.username }, 'FOSUserBundle') }}
+          </a>
+          <ul class="dropdown">
+            <li><label>User Actions</label></li>
+
+            <li>
+              <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('fos_user_profile_show') }}">
+                View Profile
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('fos_user_profile_edit') }}">
+                Edit Profile
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('fos_user_change_password') }}">
+                Change Password
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('fos_user_registration_register') }}">
+                Add new user
+              </a>
+            </li>
+          </ul>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>

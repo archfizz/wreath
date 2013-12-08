@@ -1,0 +1,22 @@
+{#
+    Twig template to render 'breadcrumbs' in Zurb Foundation 4.
+
+    This assumes a Twig variable `breadcrumbs` has the attributes `href` and `text`
+
+        $twig->render('breadcrumbs.html.twig', array(
+            'breadcrumbs' => array(
+                'href' => "http://apple.com/",
+                'text' => "Apple Website"
+            )
+        ));
+#}
+
+<ul class="breadcrumbs">
+  {% for b in breadcrumbs %}
+    {% if b.href %}
+      <li{% if loop.last %} class="current"{% endif %}><a href="{{ b.href }}">{{ b.text }}</a></li>
+    {% else %}
+      <li{% if loop.last %} class="current"{% endif %}>{{ b.text }}</li>
+    {% endif %}
+  {% endfor %}
+</ul>

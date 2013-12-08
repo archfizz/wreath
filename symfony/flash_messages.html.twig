@@ -1,0 +1,11 @@
+{#
+    Renders the session flashbag messages in the Symfony 2 framework.
+#}
+
+{% for type,messages in app.session.flashbag.all() %}
+  {% for message in messages %}
+    <div class="flash-{{ type }} {{ type }}">
+      {{ message|raw }}
+    </div>
+  {% endfor %}
+{% endfor %}
